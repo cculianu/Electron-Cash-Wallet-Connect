@@ -258,7 +258,7 @@ class WalletConnectDialog(WindowModalDialog):
         if address_str:
             self.address = address.Address.from_string(address_str)
         else:
-            self.address = self.wallet.get_unused_address(frozen_ok=False)
+            self.address = self.wallet.get_unused_address(frozen_ok=False) or self.wallet.dummy_address()
             self.wallet.storage.put("wallet_connect_address", self.address.to_cashaddr())
             self.wallet.storage.write()
         self.wallet.set_frozen_state([self.address], True)
